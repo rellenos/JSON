@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciació JSON</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Iniciació JSON</h1>
+        <hr>
+    </header>
+    <p id="noms"></p>
+    <section>
+        <div class="card" id="card1">
+            <div class="name" id="name1"></div>
+            <div class="image" id="image1"><img src="./images/moleculeman.jpg" alt=""></div>
+            <div class="age" id="age1">Age: </div>
+            <div class="identity" id="identity1">Identity: </div>
+            <div class="powers" id="powers1">Powers: </div>
+        </div>
+        <div class="card" id="card2">
+            <div class="name" id="name2"></div>
+            <div class="image" id="image2"><img src="./images/madameuppercut.png" alt=""></div>
+            <div class="age" id="age2">Age: </div>
+            <div class="identity" id="identity2">Identity: </div>
+            <div class="powers" id="powers2">Powers: </div>
+        </div>
+        <div class="card" id="card3">
+            <div class="name" id="name3"></div>
+            <div class="image" id="image3"><img src="./images/eternalflame.jpg" alt=""></div>
+            <div class="age" id="age3">Age: </div>
+            <div class="identity" id="identity3">Identity: </div>
+            <div class="powers" id="powers3">Powers: </div>
+        </div>
+    </section>
+
+    <script>
+        fetch("../json/superheroes.json")
+        .then((response) => response.json())
+            .then((data) => {
+                var superheroes = 0;
+                data.members.forEach(element => {
+                    superheroes++;           
+                });              
+                document.getElementById("name1").innerHTML+=data.members[0].name;
+                document.getElementById("name2").innerHTML+=data.members[1].name;
+                document.getElementById("name3").innerHTML+=data.members[2].name;
+                document.getElementById("age1").innerHTML+=data.members[0].age;
+                document.getElementById("age2").innerHTML+=data.members[1].age;
+                document.getElementById("age3").innerHTML+=data.members[2].age;
+                document.getElementById("identity1").innerHTML+=data.members[0].secretIdentity;
+                document.getElementById("identity2").innerHTML+=data.members[1].secretIdentity;
+                document.getElementById("identity3").innerHTML+=data.members[2].secretIdentity;
+                document.getElementById("powers1").innerHTML+=data.members[0].powers + "<br>";
+                document.getElementById("powers2").innerHTML+=data.members[1].powers + "<br>";
+                document.getElementById("powers3").innerHTML+=data.members[2].powers + "<br>";
+            })
+    </script>
+
+    <!-- <script>
+        fetch("../json/superheroes.json")
+            .then((response) => response.json()) //convertir a json
+                .then((data) => {
+                    console.log(data);
+                    console.log(data.members[1].name)
+
+                    data.members.forEach(element => {
+                        document.getElementById("noms").innerHTML+="<div style='background-color: red'>" + element.name + "</div><br>";
+                    });
+                })
+                .catch((error) => {
+                    console.log("Error al llegei l'arxiu JSON")
+                })
+    </script> -->
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/poblacio.css">
+</head>
+<body>
+    <h1>Dades del ajuntament</h1>
+    <hr>
+    <p id="poblacio"></p>
+    <p id="total"></p>
+
+    <script>
+        fetch("../json/2024_pad_mdbas.json")
+        .then((response) => response.json())
+        .then((data) => {
+            var poblacionTotal = 0;
+            data.forEach(element => {
+                poblacionTotal += parseInt(element.Valor);
+            });
+            // console.log("La població total de Barcelona es de " + poblacionTotal + " habitants.");
+            document.getElementById("total").innerHTML += "La població total de Barcelona es de " + poblacionTotal + " habitants.";
+        
+            var lista = [];
+            data.forEach(element => {
+                let barrio = element.Nom_Barri;
+                let poblacion = parseInt(element.Valor);
+                lista[barrio] = poblacion;
+            });
+            console.log(lista)
+            document.getElementById("poblacio").innerHTML = lista;
+        })
+        // .catch((error) => {
+        //     console.error("Error al llegir l'arxiu JSON: " + error)
+        // })
+    </script>
+</body>
+</html>
