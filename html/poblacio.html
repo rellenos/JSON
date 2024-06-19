@@ -3,34 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Poblacio</title>
     <link rel="stylesheet" href="../css/poblacio.css">
 </head>
 <body>
     <h1>Dades del ajuntament</h1>
     <hr>
-    <p id="poblacio"></p>
+    <p>La població de Barcelona per barris és:</p>
+    <ul id="poblacio"></ul>
     <p id="total"></p>
 
     <script>
         fetch("../json/2024_pad_mdbas.json")
         .then((response) => response.json())
         .then((data) => {
-            var poblacionTotal = 0;
+            poblacionTotal = 0;
+            poblacionPorBarrio = [];
             data.forEach(element => {
                 poblacionTotal += parseInt(element.Valor);
+                barrio = element.Nom_Barri;
+                poblacion = parseInt(element.Valor);
+                if (poblacionPorBarrio[barrio]) {
+                    poblacionPorBarrio[barrio] += poblacion;
+                } 
+                else {
+                    poblacionPorBarrio[barrio] = poblacion;
+                }
             });
-            // console.log("La població total de Barcelona es de " + poblacionTotal + " habitants.");
-            document.getElementById("total").innerHTML += "La població total de Barcelona es de " + poblacionTotal + " habitants.";
-        
-            var lista = [];
-            data.forEach(element => {
-                let barrio = element.Nom_Barri;
-                let poblacion = parseInt(element.Valor);
-                lista[barrio] = poblacion;
-            });
-            console.log(lista)
-            document.getElementById("poblacio").innerHTML = lista;
+
+            resultat = "";
+            for (barrio in poblacionPorBarrio) {
+                resultat += "<li>" + barrio + ": <b>" + poblacionPorBarrio[barrio] + " </b>habitants</li>";
+            }
+            document.getElementById("poblacio").innerHTML = resultat;
+            document.getElementById("total").innerHTML += "La població total és de <b>" + poblacionTotal + " </b>habitants.";
+
+            // console.log("Población total por barrio:", poblacionPorBarrio);
+
+            //antic comptador de població (no funcional)
+            // var lista = [];
+            // data.forEach(element => {
+            //     let barrio = element.Nom_Barri;
+            //     let poblacion = parseInt(element.Valor);
+            //     lista[barrio] = poblacion;
+            // });
+            // console.log(lista)
+            // document.getElementById("poblacio").innerHTML = lista;
         })
         // .catch((error) => {
         //     console.error("Error al llegir l'arxiu JSON: " + error)
