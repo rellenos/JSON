@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Wars API</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <h1>Star Wars API</h1>
+    <hr>
+    <p>Selecciona una categoria:</p>
+    <select name="tipusElements" id="tipusElements">
+        <option value="films">Películes</option>
+        <option value="people">Personatges</option>
+        <option value="planets">Planetes</option>
+        <option value="species">Espècies</option>
+        <option value="starships">Naus estelars</option>
+        <option value="vehicles">Vehicles</option>
+    </select>
+
+    <div class="card" id="card">
+        <div class="name" id="name"></div>
+        <div class="image" id="image"><img src=""></div>
+        <div class="age" id="age">Data naixement: </div>
+        <div class="gender" id="gender">Gènere: </div>
+        <div class="powers" id="powers">Powers: </div>
+    </div>
+</body>
+<script>
+    const url = 'https://swapi.dev/api/'
+</script>
+</html>

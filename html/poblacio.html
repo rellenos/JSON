@@ -14,14 +14,18 @@
     <p id="total"></p>
 
     <script>
+        poblacionTotal = 0;
+        poblacionPorBarrio = [];
+        poblacionPorDistrito = [];
+        resultat = "";
+
         fetch("../json/2024_pad_mdbas.json")
         .then((response) => response.json())
         .then((data) => {
-            poblacionTotal = 0;
-            poblacionPorBarrio = [];
             data.forEach(element => {
                 poblacionTotal += parseInt(element.Valor);
                 barrio = element.Nom_Barri;
+                distrito = element.Nom_Districte;
                 poblacion = parseInt(element.Valor);
                 if (poblacionPorBarrio[barrio]) {
                     poblacionPorBarrio[barrio] += poblacion;
@@ -31,7 +35,6 @@
                 }
             });
 
-            resultat = "";
             for (barrio in poblacionPorBarrio) {
                 resultat += "<li>" + barrio + ": <b>" + poblacionPorBarrio[barrio] + " </b>habitants</li>";
             }
